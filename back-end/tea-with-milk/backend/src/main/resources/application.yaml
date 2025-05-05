@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/milkyTea?useSSL=false&serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 1234
+  servlet:
+    multipart:
+      max-file-size: 5MB
+  redis:
+    host: 192.168.204.133
+    port: 6379
+minio:
+  accessKey: minio
+  secretKey: minio123
+  bucket: milky-tea
+  endpoint: http://192.168.204.133:9000
+  readPath: http://192.168.204.133:9000
+mybatis-plus:
+  type-aliases-package: com.pwy.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

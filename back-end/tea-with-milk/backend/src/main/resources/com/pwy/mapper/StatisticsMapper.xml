@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pwy.mapper.StatisticsMapper">
+<!--  查询商品销量前五名的商品-->
+    <select id="getGoodsIdAndTotalCount" resultType="goodsTotalCount" parameterType="string">
+        SELECT goods_id,SUM(count) as total_count
+        FROM `orders_goods` WHERE orders_id in
+        <foreach collection="orderIds" open="(" close=")" separator="," item="id" >
+            #{id}
+        </foreach>
+        GROUP BY  goods_id  ORDER BY total_count DESC  LIMIT 5
+    </select>
+<!--  查询指定时间优惠券使用率-->
+    <select id="queryVoucherUseRate" resultType="voucherTotalCount">
+        SELECT voucher_id,count(voucher_id) as TotalCount from user_voucher where use_time between #{startTime} and #{endTime} GROUP BY voucher_id
+    </select>
+    <select id="getDayOfOrderCountForMonth" resultType="dayCount">
+        SELECT count(*) as count, LPAD(DAY(order_time), 2, '0') as day FROM orders WHERE DATE(order_time) BETWEEN #{start} and #{end} and status>=4 GROUP BY LPAD(DAY(order_time), 2, '0') order by LPAD(DAY(order_time), 2, '0')
+    </select>
+    <select id="getDayOfOrderCountForWeek" resultType="dayCount">
+        SELECT count(*) as count,DATE(order_time) as day FROM orders WHERE DATE(order_time) BETWEEN #{start} and #{end} and status>=4 GROUP BY DATE(order_time) order by DATE(order_time)
+    </select>
+    <select id="getMonthOfOrderCountForYear" resultType="dayCount">
+        SELECT count(*) as count,MONTH(order_time) as day from orders WHERE YEAR(order_time)=#{year} and status>=4 GROUP BY MONTH(order_time)
+    </select>
+</mapper>

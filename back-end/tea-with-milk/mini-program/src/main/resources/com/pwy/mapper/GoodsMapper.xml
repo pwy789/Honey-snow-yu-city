@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pwy.mapper.GoodsMapper">
+    <select id="getGoodsPictures" parameterType="string" resultType="string">
+        select url from goods_pictures where goods_id=#{id}
+    </select>
+    <select id="getGoodsDimensionSkus" parameterType="string" resultType="dimensionSkuVo">
+        SELECT gs.sku_id,gs.price as sku_price,s.`name` as sku_name,d.id as dimension_id ,d.`name` as dimension_name ,d.sort as dimension_sort
+        FROM goods_sku as gs,sku as s,dimension as d
+        WHERE gs.goods_id=#{id} AND  gs.sku_id=s.id and s.dimension_id=d.id
+    </select>
+    <update id="restoreBalance" parameterType="map">
+        <foreach collection="map" item="g" separator=";" index="id">
+            update goods set balance=balance+#{g} where id=#{id}
+        </foreach>
+    </update>
+</mapper>

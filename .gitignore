@@ -1,0 +1,7 @@
+# 前端部分
+dist/
+.vscode/
+# 后端部分
+target/
+.idea/
+*.iml

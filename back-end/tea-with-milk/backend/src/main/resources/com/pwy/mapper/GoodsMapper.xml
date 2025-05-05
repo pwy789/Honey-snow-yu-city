@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pwy.mapper.GoodsMapper">
+
+    <select id="getGoodsImages" resultType="goodsPictures">
+        select *from goods_pictures where goods_id=#{id}
+    </select>
+    <select id="getGoodsSkus" resultType="goodsSku">
+        select * from goods_sku where goods_id=#{id}
+    </select>
+   <insert id="insertGoodsImages" parameterType="goodsPictures">
+       insert into goods_pictures(goods_id, url) VALUE(#{goodsId},#{url})
+   </insert>
+    <update id="updateGoodsImages" parameterType="goodsPictures">
+
+            UPDATE goods_pictures
+            SET url =#{url}
+            WHERE id = #{id}
+
+    </update>
+ <insert id="saveImage" parameterType="goodsPictures">
+     insert into goods_pictures(goods_id, url) VALUE (#{goodsId},#{url})
+ </insert>
+    <delete id="deleteGoodsImages" parameterType="int">
+        delete from goods_pictures where id=#{id}
+    </delete>
+    <insert id="insertGoodsSkus" parameterType="goodsSku">
+        insert into goods_sku(goods_id, sku_id,price) VALUE (#{goodsId},#{skuId},#{price})
+    </insert>
+    <delete id="deleteGoodsSkus" parameterType="int">
+        delete from goods_sku where sku_id=#{skuId}
+    </delete>
+    <delete id="delImageByIds" parameterType="list">
+        delete from goods_pictures where goods_id in
+    <foreach collection="ids" item="id" open="(" close=")" separator=",">
+        #{id}
+    </foreach>
+    </delete>
+    <delete id="delSkusByIds" parameterType="list">
+        delete from goods_sku where goods_id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+    <update id="updateGoodsSkus" parameterType="integer">
+        update goods_sku set price=#{price} where sku_id=#{skuId}
+    </update>
+</mapper>

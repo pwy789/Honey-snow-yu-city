@@ -1,0 +1,25 @@
+html,body{
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+div{
+  box-sizing: border-box;
+}
+img{
+  display: block;
+}
+body p,h4,h2,h5{
+  margin: 0;
+  padding: 0;
+}
+body ul,li,ol{
+  list-style: none; /* 去除项目符号或数字 */
+  margin: 0;       /* 去除默认的外边距 */
+  padding: 0;      /* 去除默认的内边距 */
+  user-select: none;  /* 禁止用户选择文本 */
+}
+#app{
+  height: 100%;
+}
