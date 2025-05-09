@@ -2,9 +2,8 @@
 import { ref } from 'vue'
 const isCollapse = ref(false)
 import {
-  Document,
   Menu as IconMenu,
-  Setting,
+  Tickets,
 } from '@element-plus/icons-vue'
 const defaultActive=ref('/statistics')
 </script>
@@ -25,7 +24,7 @@ const defaultActive=ref('/statistics')
         :router="true"
       >
       <el-menu-item index="/statistics">
-          <el-icon><setting /></el-icon>
+        <el-icon><Calendar /></el-icon>
           <span>流水统计</span>
         </el-menu-item>
        <el-sub-menu index="2">
@@ -35,30 +34,30 @@ const defaultActive=ref('/statistics')
         </template>
         <el-menu-item-group >
           <el-menu-item index="/tastecategory">
-            <el-icon><setting /></el-icon>
+          
             <span>款式分类</span>
           </el-menu-item >
           <el-menu-item index="/skuCategory">
-            <el-icon><setting /></el-icon>
             <span>sku分类</span>
           </el-menu-item >
       </el-menu-item-group>
        </el-sub-menu>
      
         <el-menu-item index="/milkytea">
-          <el-icon><icon-menu /></el-icon>
+          <el-icon><MilkTea /></el-icon>
+          
           <span>商品中心</span>
         </el-menu-item>
         <el-menu-item index="/shop" >
-          <el-icon><document /></el-icon>
+          <el-icon><Shop /></el-icon>
           <span>门店信息</span>
         </el-menu-item>
         <el-menu-item index="/voucher">
-          <el-icon><setting /></el-icon>
+          <el-icon><Ticket /></el-icon>
           <span>优惠券管理</span>
         </el-menu-item>
         <el-menu-item index="/orders">
-          <el-icon><setting /></el-icon>
+            <el-icon><Tickets /></el-icon>
           <span>订单明细</span>
         </el-menu-item>
         
